@@ -50,7 +50,7 @@ for key in pbar(data.keys()):
     id_ = data[key]['properties']['IdProduit']
     data[key]['properties']['type_vin'] = get_winetype(id_)
     
-    if 'premier cru' or 'grand cru' not in data[key]['properties']['denomination']:
+    if 'premier cru' or 'Grand Cru' not in data[key]['properties']['denomination']:
         data[key]['properties']['Premier Cru'] = 0
         data[key]['properties']['Grand Cru'] = 0
         if data[key]['properties']['denomination'] != data[key]['properties']['appellation']:
