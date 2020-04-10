@@ -9,6 +9,8 @@ from progressbar import ProgressBar
 
 pbar = ProgressBar()
 
+file = open("/Users/Hugo/Documents/Github/Projet_informatique_ENSAE/cartes/scripts/grandscrus.txt",'r')
+grandscrus = file.read().split('\n')
 
 #emplacement du fichier json d'origine
 os.chdir('/Users/Hugo/Documents/Cours/ENSAE/3A/S2/Projet Informatique')
@@ -61,6 +63,7 @@ for key in pbar(data.keys()):
                 data[key]['properties']['climat'] =  ''
         else :
             data[key]['properties']['climat'] =  ''
+
     if 'premier cru' in data[key]['properties']['denomination']:
         
         data[key]['properties']['Premier Cru'] = 1
@@ -69,17 +72,20 @@ for key in pbar(data.keys()):
         else :
             data[key]['properties']['climat'] = re.findall('(?<=cru)(?s)(.*$)',
                                                            data[key]['properties']['denomination'])[0].lstrip()
-        
+   
     if 'Grand cru' in data[key]['properties']['denomination']:
         
         data[key]['properties']['Grand Cru'] = 1
-        if data[key]['properties']['denomination'].split(" ")[-1]=='cru':
+        if data[key]['properties']['denomination'].split(" ")[-1]=='Cru':
             data[key]['properties']['climat'] = ''
         else :
             data[key]['properties']['climat'] = re.findall('(?<=cru)(?s)(.*$)',
                                                            data[key]['properties']['denomination'])[0].lstrip()
 
-
+    for gc in grandscrus:
+        if data[key]['properties']['appellation'] == gc :
+            data[key]['properties']['Grand Cru'] = 1 
+            
 print('Scraping is over... Now move on to create new json file with type')
 
 os.chdir('/Users/Hugo/Documents/Github/carte_climats_vin_bourgogne/jsons')
