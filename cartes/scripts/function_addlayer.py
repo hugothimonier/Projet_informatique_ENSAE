@@ -88,10 +88,10 @@ def add_layertomap(data, style, feature_group_name, map, show = True):
 
 	feature_group.add_to(map)
 
-	return None
+	return feature_group
 
 
-def get_image_from_folder(img_name, directory, wine_info):
+def get_image_from_folder(img_name, directory, wine_info, picture = True):
 	"""
 	get the image from its folder, decode it and returns it as an iFrame object to be put into the popup.
 
@@ -99,6 +99,7 @@ def get_image_from_folder(img_name, directory, wine_info):
 	img_name : a string corresponding to the image name
 	directory : a string indicating the abslute path for the images
 	wine info : some information about the wine. Should be str
+	picture : a boolean to indicate whether or not the picture should be included in the popup.
 
 	returns an iframe object to be placed into the popup.
 	"""
@@ -112,10 +113,72 @@ def get_image_from_folder(img_name, directory, wine_info):
 
 	html = '<table> <tr><td> <p> %s </p> </td>' % wine_info
 
-	html = html + '<td> <img src="data:image/png;base64,{}"> </td> </tr> </table>'
-	html = html.format
+	if picture:
+
+		html = html + '<td> <img src="data:image/png;base64,{}"> </td> </tr> </table>'
+		html = html.format
 	
 
-	iframe = folium.IFrame(html(encoded.decode('UTF-8')), width=632+20, height=420+20)
+		iframe = folium.IFrame(html(encoded.decode('UTF-8')), width=632+20, height=420+20)
 
 	return iframe
+
+
+
+def add_layertomap_no_image(data, style, feature_group_name, map, show = True):
+
+	'''
+	This functiona adds polygons where the parcels are located to a map
+
+
+	Output : None
+
+
+	Input : 
+
+	data : dictionnary where each key refers to a geojson like data structure
+
+	style : a dictionnary of the sort defining the style of the polygons
+	{'fillColor': '#DC1A40', 'color': '#464140', 'fill_opacity': 1, 'line_opacity' : 0.5}
+
+	feature_group_name : string variable refering to the name of the group of data added to the map
+
+	map : map to which data is added
+	'''
+	if show : 
+		feature_group = folium.FeatureGroup(name=feature_group_name)
+	else :
+		feature_group = folium.FeatureGroup(name=feature_group_name, show = False)
+
+	for key in data.keys():
+
+		if data[key]['properties']['Premier Cru'] == 0 and data[key]['properties']['Grand Cru'] == 0:
+
+			if data[key]['properties']['climat'] != '':
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b> \n %s </p> \n <b> Climat : </b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+
+			if data[key]['properties']['climat'] == '':
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
+
+		if data[key]['properties']['Premier Cru'] == 1:
+
+			if data[key]['properties']['climat'] != '':
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+        
+			if data[key]['properties']['climat'] == '':
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+        
+		if data[key]['properties']['Grand Cru'] == 1:
+
+			if data[key]['properties']['climat'] != '':
+				folium.GeoJson(data[key],
+					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+
+			if data[key]['properties']['climat'] == '':
+				folium.GeoJson(data[key],
+					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+
+	feature_group.add_to(map)
+
+	return None
+
