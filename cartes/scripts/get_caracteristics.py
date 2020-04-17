@@ -121,7 +121,7 @@ for key in appellation.keys():
 print('on crée le json avec les descriptions et on exporte')
 
 json_ = json.dumps(appellation_)
-f = open("/Users/Hugo/Documents/Github/Projet_informatique_ENSAE/jsons/description.json","w")
+f = open(path+"jsons/description.json","w")
 f.write(json_)
 f.close()
 
