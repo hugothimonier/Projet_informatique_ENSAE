@@ -5,7 +5,8 @@ import base64
 from shapely.geometry import MultiPolygon, shape, mapping
 from PIL import Image
 
-def add_layertomap(data, style, feature_group_name, map, show = True):
+def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hugo'):
+
 
 	'''
 	This functiona adds polygons where the parcels are located to a map
@@ -25,6 +26,13 @@ def add_layertomap(data, style, feature_group_name, map, show = True):
 
 	map : map to which data is added
 	'''
+	assert user in ['Gabriel','Hugo']
+
+	if user == 'Hugo':
+		loc_image = '/Users/'+user+'/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/'
+	else :
+		loc_image = '/Users/'+user+'/Documents/GitHub/Projet_informatique_ENSAE/img/wines/resized_images/'
+
 	if show : 
 		feature_group = folium.FeatureGroup(name=feature_group_name)
 	else :
@@ -39,15 +47,15 @@ def add_layertomap(data, style, feature_group_name, map, show = True):
 
 				# get information on the wine
 				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appelation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>' %(data[key]['properties']['appellation'],data[key]['properties']['climat'])
-				pop_up_content = get_image_from_folder(name, '/Users/Gabriel/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/', info)
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>' %(data[key]['properties']['appellation'],data[key]['properties']['climat'])
+				pop_up_content = get_image_from_folder(name, loc_image, info)
 				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
 
 			if data[key]['properties']['climat'] == '':
 
 				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b>  Appelation :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i> </p>'%(data[key]['properties']['appellation'])
-				pop_up_content = get_image_from_folder(name, '/Users/Gabriel/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/', info)
+				info = '<p style = "font-family:cursive"> <ul> <li> <b>  Appellation :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i> </p>'%(data[key]['properties']['appellation'])
+				pop_up_content = get_image_from_folder(name, loc_image, info)
 				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
 				#folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<b> Appelation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
 
@@ -55,16 +63,16 @@ def add_layertomap(data, style, feature_group_name, map, show = True):
 
 			if data[key]['properties']['climat'] != '':
 				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appelation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'],data[key]['properties']['climat'])
-				pop_up_content = get_image_from_folder(name, '/Users/Gabriel/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/', info)
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'],data[key]['properties']['climat'])
+				pop_up_content = get_image_from_folder(name, loc_image, info)
 				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
 #				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))#  '<p> <b> Appelation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
         
 			if data[key]['properties']['climat'] == '':
 
 				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appelation :</b> %s Premier Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> '%(data[key]['properties']['appellation'])
-				pop_up_content = get_image_from_folder(name, '/Users/Gabriel/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/', info)
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> '%(data[key]['properties']['appellation'])
+				pop_up_content = get_image_from_folder(name, loc_image, info)
 				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
 #				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<b> Appelation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
         
@@ -72,16 +80,16 @@ def add_layertomap(data, style, feature_group_name, map, show = True):
 
 			if data[key]['properties']['climat'] != '':
 				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appelation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'],data[key]['properties']['climat'])
-				pop_up_content = get_image_from_folder(name, '/Users/Gabriel/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/', info)
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'],data[key]['properties']['climat'])
+				pop_up_content = get_image_from_folder(name,loc_image, info)
 				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
 #				folium.GeoJson(data[key],
 #					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<p> <b> Appelation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
 
 			if data[key]['properties']['climat'] == '':
 				name = data[key]['image']		
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appelation :</b> %s Grand Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'])
-				pop_up_content = get_image_from_folder(name, '/Users/Gabriel/Documents/Github/Projet_informatique_ENSAE/img/wines/resized_images/', info)
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Grand Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'])
+				pop_up_content = get_image_from_folder(name, loc_image , info)
 				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 500, min_width = 250, html_parse = True))
 #				folium.GeoJson(data[key],
 #					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<b> Appelation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
@@ -155,28 +163,28 @@ def add_layertomap_no_image(data, style, feature_group_name, map, show = True):
 		if data[key]['properties']['Premier Cru'] == 0 and data[key]['properties']['Grand Cru'] == 0:
 
 			if data[key]['properties']['climat'] != '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b> \n %s </p> \n <b> Climat : </b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appellation :</b> \n %s </p> \n <b> Climat : </b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
 
 			if data[key]['properties']['climat'] == '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appellation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
 
 		if data[key]['properties']['Premier Cru'] == 1:
 
 			if data[key]['properties']['climat'] != '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appellation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
         
 			if data[key]['properties']['climat'] == '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appellation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
         
 		if data[key]['properties']['Grand Cru'] == 1:
 
 			if data[key]['properties']['climat'] != '':
 				folium.GeoJson(data[key],
-					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appellation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
 
 			if data[key]['properties']['climat'] == '':
 				folium.GeoJson(data[key],
-					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appellation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
 
 	feature_group.add_to(map)
 
@@ -214,28 +222,28 @@ def add_layertomap_search(data, style, feature_group_name, map, show = True):
 		if data[key]['properties']['Premier Cru'] == 0 and data[key]['properties']['Grand Cru'] == 0:
 
 			if data[key]['properties']['climat'] != '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b> \n %s </p> \n <b> Climat : </b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appellation :</b> \n %s </p> \n <b> Climat : </b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
 
 			if data[key]['properties']['climat'] == '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appellation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
 
 		if data[key]['properties']['Premier Cru'] == 1:
 
 			if data[key]['properties']['climat'] != '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appellation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
         
 			if data[key]['properties']['climat'] == '':
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appellation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
         
 		if data[key]['properties']['Grand Cru'] == 1:
 
 			if data[key]['properties']['climat'] != '':
 				folium.GeoJson(data[key],
-					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appelation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
+					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<p> <b> Appellation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
 
 			if data[key]['properties']['climat'] == '':
 				folium.GeoJson(data[key],
-					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appelation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup('<b> Appellation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
 
 	feature_group.add_to(map)
 
