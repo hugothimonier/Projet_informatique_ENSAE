@@ -13,21 +13,21 @@ def get_info(data, description = True):
 
 		if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
 			if data['properties']['climat'] != '':
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'],data['properties']['climat'])
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p>'%(data['properties']['appellation'],data['properties']['climat'])
 			if data['properties']['climat'] == '':
-				info = '<p style = "font-family:cursive"> <ul> <li> <b>  Appellation :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i> </p>'%(data['properties']['appellation'])
+				info = '<p style = "font-family:cursive"> <ul> <li> <b>  Appellation :</b> %s </li> </ul>  </p>'%(data['properties']['appellation'])
 
 		if data['properties']['Premier Cru'] == 1:
 			if data['properties']['climat'] != '':
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'],data['properties']['climat'])
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p>'%(data['properties']['appellation'],data['properties']['climat'])
 			if data[key]['properties']['climat'] == '':
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> '%(data['properties']['appellation'])
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul>  </p> '%(data['properties']['appellation'])
 
 		if data['properties']['Grand Cru'] == 1:
 			if data['properties']['climat'] != '':
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'],data['properties']['climat'])
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p>'%(data['properties']['appellation'],data['properties']['climat'])
 			if data['properties']['climat'] == '':
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Grand Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'])
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Grand Cru </li> </ul>  </p>'%(data['properties']['appellation'])
 
 	if description :
 
@@ -37,31 +37,31 @@ def get_info(data, description = True):
 				if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
 
 					if data['properties']['climat'] != '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'])
 
 					if data['properties']['climat'] == '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'])
 
 				if data['properties']['Premier Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
 							
 					if data['properties']['climat'] == '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
 							
 				if data['properties']['Grand Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
 							
 					if data['properties']['climat'] == '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
 						
 			if data['properties']['mets_et_vin'] == '' :
@@ -69,31 +69,31 @@ def get_info(data, description = True):
 				if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
 
 					if data['properties']['climat'] != '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
 
 					if data['properties']['climat'] == '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
 								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
 
 				if data['properties']['Premier Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
 							
 					if data['properties']['climat'] == '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
 							
 				if data['properties']['Grand Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
 							
 					if data['properties']['climat'] == '':
-						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
 								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
 						
 	return info
@@ -168,7 +168,7 @@ def get_image_from_folder(img_name, directory, wine_info, picture = True):
 
 	if picture:
 
-		html = html + '<td> <img src="data:image/png;base64,{}"> </td> </tr> </table>'
+		html = html + '<td> <img src="data:image/png;base64,{}"> \n <i> Image : <a href ="https://www.vivino.com/"> Vivino</a>.</i> </td> </tr> </table>'
 		html = html.format
 	
 
