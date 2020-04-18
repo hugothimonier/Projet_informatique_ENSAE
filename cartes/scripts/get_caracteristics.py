@@ -116,7 +116,7 @@ for key in appellation.keys():
 
 	row = {'oeil': oeil,'nez':nez,'bouche': bouche, 'mets_et_vin' : metsvin}
 	key = key.replace('-', ' ').lower()
-	appellation_[key.title()] = row
+	appellation_[key] = row
 
 print('on crée le json avec les descriptions et on exporte')
 
