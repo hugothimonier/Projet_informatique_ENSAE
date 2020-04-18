@@ -8,7 +8,7 @@ print('current directory : ' ,os.getcwd())
 files = os.listdir()
 
 # for resizing
-basewidth = 200
+basewidth = 125
 
 # edit all the files of the directory
 for f in files : 
