@@ -5,7 +5,100 @@ import base64
 from shapely.geometry import MultiPolygon, shape, mapping
 from PIL import Image
 
-def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hugo'):
+
+
+def get_info(data, description = True):
+
+	if not description or data['properties']['nez'] == '' :
+
+		if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
+			if data['properties']['climat'] != '':
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'],data['properties']['climat'])
+			if data['properties']['climat'] == '':
+				info = '<p style = "font-family:cursive"> <ul> <li> <b>  Appellation :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i> </p>'%(data['properties']['appellation'])
+
+		if data['properties']['Premier Cru'] == 1:
+			if data['properties']['climat'] != '':
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'],data['properties']['climat'])
+			if data[key]['properties']['climat'] == '':
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> '%(data['properties']['appellation'])
+
+		if data['properties']['Grand Cru'] == 1:
+			if data['properties']['climat'] != '':
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'],data['properties']['climat'])
+			if data['properties']['climat'] == '':
+				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Grand Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data['properties']['appellation'])
+
+	if description :
+
+		if data['properties']['nez'] != '' :
+			if data['properties']['mets_et_vin'] != '' :
+
+				if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
+
+					if data['properties']['climat'] != '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'])
+
+					if data['properties']['climat'] == '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'])
+
+				if data['properties']['Premier Cru'] == 1:
+
+					if data['properties']['climat'] != '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+							
+					if data['properties']['climat'] == '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+							
+				if data['properties']['Grand Cru'] == 1:
+
+					if data['properties']['climat'] != '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+							
+					if data['properties']['climat'] == '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+						
+			if data['properties']['mets_et_vin'] == '' :
+
+				if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
+
+					if data['properties']['climat'] != '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+
+					if data['properties']['climat'] == '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
+								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+
+				if data['properties']['Premier Cru'] == 1:
+
+					if data['properties']['climat'] != '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+							
+					if data['properties']['climat'] == '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+							
+				if data['properties']['Grand Cru'] == 1:
+
+					if data['properties']['climat'] != '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+							
+					if data['properties']['climat'] == '':
+						info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+						
+	return info
+
+def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hugo', description = True):
 
 
 	'''
@@ -26,6 +119,7 @@ def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hu
 
 	map : map to which data is added
 	'''
+
 	assert user in ['Gabriel','Hugo']
 
 	if user == 'Hugo':
@@ -40,59 +134,10 @@ def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hu
 
 	for key in data.keys():
 
-
-		if data[key]['properties']['Premier Cru'] == 0 and data[key]['properties']['Grand Cru'] == 0:
-
-			if data[key]['properties']['climat'] != '':
-
-				# get information on the wine
-				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>' %(data[key]['properties']['appellation'],data[key]['properties']['climat'])
-				pop_up_content = get_image_from_folder(name, loc_image, info)
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
-
-			if data[key]['properties']['climat'] == '':
-
-				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b>  Appellation :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i> </p>'%(data[key]['properties']['appellation'])
-				pop_up_content = get_image_from_folder(name, loc_image, info)
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
-				#folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<b> Appelation :</b>\n %s'%(data[key]['properties']['appellation']), max_width = 250, min_width = 250))
-
-		if data[key]['properties']['Premier Cru'] == 1:
-
-			if data[key]['properties']['climat'] != '':
-				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'],data[key]['properties']['climat'])
-				pop_up_content = get_image_from_folder(name, loc_image, info)
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
-#				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))#  '<p> <b> Appelation :</b>\n %s Premier Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
-        
-			if data[key]['properties']['climat'] == '':
-
-				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p> '%(data[key]['properties']['appellation'])
-				pop_up_content = get_image_from_folder(name, loc_image, info)
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
-#				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<b> Appelation :</b>\n %s Premier Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
-        
-		if data[key]['properties']['Grand Cru'] == 1:
-
-			if data[key]['properties']['climat'] != '':
-				name = data[key]['image']
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'],data[key]['properties']['climat'])
-				pop_up_content = get_image_from_folder(name,loc_image, info)
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
-#				folium.GeoJson(data[key],
-#					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<p> <b> Appelation :</b>\n %s \n Grand Cru \n </p> <b> Climat :</b> %s'%(data[key]['properties']['appellation'],data[key]['properties']['climat']),max_width = 250, min_width = 250))
-
-			if data[key]['properties']['climat'] == '':
-				name = data[key]['image']		
-				info = '<p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Grand Cru </li> </ul>  \n <i> Image récupérée sur <a href ="https://www.vivino.com/"> Vivino</a>.</i></p>'%(data[key]['properties']['appellation'])
-				pop_up_content = get_image_from_folder(name, loc_image , info)
-				folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 500, min_width = 250, html_parse = True))
-#				folium.GeoJson(data[key],
-#					style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(image))# '<b> Appelation :</b>\n %s Grand Cru \n '%(data[key]['properties']['appellation']),max_width = 250, min_width = 250))
+		name = data[key]['image']
+		info = get_info(data[key], description)
+		pop_up_content = get_image_from_folder(name, loc_image, info)
+		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
 
 	feature_group.add_to(map)
 
@@ -195,7 +240,7 @@ def add_layertomap_no_image(data, style, feature_group_name, map, show = True):
 def add_layertomap_search(data, style, feature_group_name, map, show = True):
 
 	'''
-	This functiona adds polygons where the parcels are located to a map
+	This function adds polygons where the parcels are located to a map
 
 
 	Output : the feature group
@@ -248,7 +293,4 @@ def add_layertomap_search(data, style, feature_group_name, map, show = True):
 	feature_group.add_to(map)
 
 	return feature_group
-	
-
-
 
