@@ -137,7 +137,7 @@ def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hu
 		name = data[key]['image']
 		info = get_info(data[key], description)
 		pop_up_content = get_image_from_folder(name, loc_image, info)
-		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 550, min_width = 250, html_parse = True))
+		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 700, min_width = 250, html_parse = True))
 
 	feature_group.add_to(map)
 
