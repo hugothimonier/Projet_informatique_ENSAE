@@ -37,64 +37,64 @@ def get_info(data, description = True):
 				if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
 
 					if data['properties']['climat'] != '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p></font> ' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b> Nez </b> : %s </ul><ul> <b> Bouche </b>: %s </ul> <ul> <b> Robe </b>: %s </ul> <ul> <b>Accords mets et vins </b>: %s </ul> </p></font> ' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']), str(data['properties']['mets_et_vin']))
 
 					if data['properties']['climat'] == '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p> </font>' %(data['properties']['appellation'],
-								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b> Nez </b> : %s </ul><ul> <b> Bouche </b>: %s </ul> <ul> <b> Robe </b>: %s </ul> <ul> <b> Accords mets et vins </b>: %s </ul> </p> </font>' %(data['properties']['appellation'],
+								str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']), str(data['properties']['mets_et_vin']))
 
 				if data['properties']['Premier Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p> </font>' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul> <ul> <b>Accords mets et vins</b> : %s </ul> </p> </font>' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']), str(data['properties']['mets_et_vin']))
 							
 					if data['properties']['climat'] == '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p> </font>' %(data['properties']['appellation'],
-								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul><b>Nez</b> : %s </ul><ul> <b>Bouche </b>: %s </ul> <ul><b>Robe </b>: %s </ul> <ul> <b>Accords mets et vins</b> : %s </ul> </p> </font>' %(data['properties']['appellation'],
+								data['properties']['nez'], data['properties']['bouche'], str(data['properties']['oeil']), str(data['properties']['mets_et_vin']))
 							
 				if data['properties']['Grand Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p> </font>' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul><b> Nez</b> : %s </ul><ul> <b>Bouche </b>: %s </ul> <ul> <b>Robe</b> : %s </ul> <ul> <b>Accords mets et vins </b>: %s </ul> </p> </font>' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']), str(data['properties']['mets_et_vin']))
 							
 					if data['properties']['climat'] == '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> <ul> Accords mets et vins : %s </ul> </p> </font>	' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> {0}  Grand Cru  </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : {1} </ul><ul><b> Bouche</b> : {2} </ul> <ul> <b>Robe</b> : {3} </ul> <ul> <b> Accords mets et vins</b> : {4} </ul> </p> </font>	'.format(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']), str(data['properties']['mets_et_vin']) )
 						
 			if data['properties']['mets_et_vin'] == '' :
 
 				if data['properties']['Premier Cru'] == 0 and data['properties']['Grand Cru'] == 0:
 
 					if data['properties']['climat'] != '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li> <b> Climat : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']))
 
 					if data['properties']['climat'] == '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> <li></ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
-								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation : </b> %s </li> </ul> </p> <p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul>  </p>' %(data['properties']['appellation'],
+								str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']))
 
 				if data['properties']['Premier Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul>  </p>' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li> <b> Climat :</b> %s </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul>  </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']))
 							
 					if data['properties']['climat'] == '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> <li>  </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
-								data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'], data['properties']['mets_et_vin'] )
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s Premier Cru </li> </ul> </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul> </p>' %(data['properties']['appellation'],
+								str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']))
 							
 				if data['properties']['Grand Cru'] == 1:
 
 					if data['properties']['climat'] != '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> <li>  <b> Climat :</b> %s </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']))
 							
 					if data['properties']['climat'] == '':
-						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> Nez : %s </ul><ul> Bouche : %s </ul> <ul> Robe : %s </ul> </p>' %(data['properties']['appellation'],
-								data['properties']['climat'], data['properties']['nez'], data['properties']['bouche'], data['properties']['oeil'])
+						info = '<font size="-1">  <p style = "font-family:cursive"> <ul> <li> <b> Appellation :</b> %s  Grand Cru  </li> </ul>  </p><p style = "font-family:cursive"> <b> Caractéristiques du vin </b> <ul> <b>Nez</b> : %s </ul><ul> <b>Bouche</b> : %s </ul> <ul> <b>Robe</b> : %s </ul> </p>' %(data['properties']['appellation'],
+								data['properties']['climat'], str(data['properties']['nez']), str(data['properties']['bouche']), str(data['properties']['oeil']))
 						
 	return info
 
@@ -129,7 +129,7 @@ def add_layertomap(data, style, feature_group_name, map, show = True, user = 'Hu
 		name = data[key]['image']
 		info = get_info(data[key], description)
 		pop_up_content = get_image_from_folder(name, loc_image, info)
-		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_width = 700, min_width = 250, html_parse = True))
+		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_height = 250, max_width = 700, min_width = 250, html_parse = True))
 
 	feature_group.add_to(map)
 
@@ -187,6 +187,33 @@ def add_layertomap_no_image(data, style, feature_group_name, map, show = True):
 
 	for key in data.keys():
 
+		info = get_info(data[key])
+		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(info, max_height = 250, max_width = 700, min_width = 350))
+
+	feature_group.add_to(map)
+
+	return None
+
+
+def add_layertomap_no_image_old(data, style, feature_group_name, map, show = True):
+
+	'''
+	This functiona adds polygons where the parcels are located to a map
+	Output : None
+	Input : 
+	data : dictionnary where each key refers to a geojson like data structure
+	style : a dictionnary of the sort defining the style of the polygons
+	{'fillColor': '#DC1A40', 'color': '#464140', 'fill_opacity': 1, 'line_opacity' : 0.5}
+	feature_group_name : string variable refering to the name of the group of data added to the map
+	map : map to which data is added
+	'''
+	if show : 
+		feature_group = folium.FeatureGroup(name=feature_group_name)
+	else :
+		feature_group = folium.FeatureGroup(name=feature_group_name, show = False)
+
+	for key in data.keys():
+
 		if data[key]['properties']['Premier Cru'] == 0 and data[key]['properties']['Grand Cru'] == 0:
 
 			if data[key]['properties']['climat'] != '':
@@ -216,6 +243,7 @@ def add_layertomap_no_image(data, style, feature_group_name, map, show = True):
 	feature_group.add_to(map)
 
 	return None
+
 
 
 

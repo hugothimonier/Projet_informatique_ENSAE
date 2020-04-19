@@ -108,15 +108,18 @@ for key in appellation.keys():
 	if key == 'Romanée (La)':
 		key = 'La Romanée'
 	if key =='Échézeaux':
-		key = 'Echézeaux'
+		key = 'Echezeaux'
 	if key =='Grands-Échézeaux':
-		key = 'Grands-Echézeaux'
-	if key == 'Grande Rue (La)':
+		key = 'Grands-Echezeaux'
+	if key == 'Grande-Rue (La)':
 		key = 'La Grande Rue'
 
 	row = {'oeil': oeil,'nez':nez,'bouche': bouche, 'mets_et_vin' : metsvin}
 	key = key.replace('-', ' ').lower()
 	appellation_[key] = row
+
+appellation_['charlemagne'] = appellation_['corton charlemagne']
+print(appellation_.keys())
 
 print('on crée le json avec les descriptions et on exporte')
 
@@ -136,6 +139,12 @@ for key in data.keys():
 		data[key]['properties']['bouche'] = appellation_[data[key]['properties']['appellation'].lower().replace('-',' ')]['bouche']
 		data[key]['properties']['oeil'] = appellation_[data[key]['properties']['appellation'].lower().replace('-',' ')]['oeil']
 		data[key]['properties']['mets_et_vin'] = appellation_[data[key]['properties']['appellation'].lower().replace('-',' ')]['mets_et_vin']
+	else :		
+		data[key]['properties']['nez'] = ''
+		data[key]['properties']['bouche'] = ''
+		data[key]['properties']['oeil'] = ''
+		data[key]['properties']['mets_et_vin'] = ''
+
 
 json = json.dumps(data)
 f = open("./jsons/data_bourgogne_wtype_wdes.json","w")
