@@ -166,6 +166,75 @@ def get_image_from_folder(img_name, directory, wine_info, picture = True):
 
 	return iframe
 
+def get_logo(type_vin, directory, wine_info, picture = True):
+	"""
+	get the image from its folder, decode it and returns it as an iFrame object to be put into the popup.
+	arguments: 
+	img_name : a string corresponding to the image name
+	directory : a string indicating the abslute path for the images
+	wine info : some information about the wine. Should be str
+	picture : a boolean to indicate whether or not the picture should be included in the popup.
+	returns an iframe object to be placed into the popup.
+	"""
+
+	if type_vin == 'blanc' :
+		loc = directory + 'Bouteille-Blanc1.png'
+		a = '45'
+	else :
+		loc = directory + 'Bouteille-Rouge1.png'
+		a = '25'
+
+	encoded = base64.b64encode(open(loc, 'rb').read())
+
+	html = '<table> <tr><td> <p> %s </p> </td>' % wine_info
+
+	if picture:
+
+		html = html + '<td> <img style="width:'+a+'%; height:10%;" src="data:image/png;base64,{}"> </td> </tr> </table>'
+		html = html.format
+	
+
+		iframe = folium.IFrame(html(encoded.decode('UTF-8')), width=632+20, height=420+20)
+
+	return iframe
+
+def add_layertomap_logo(data, style, user, feature_group_name, map, show = True):
+
+	'''
+	This functiona adds polygons where the parcels are located to a map
+	Output : None
+	Input : 
+	data : dictionnary where each key refers to a geojson like data structure
+	style : a dictionnary of the sort defining the style of the polygons
+	{'fillColor': '#DC1A40', 'color': '#464140', 'fill_opacity': 1, 'line_opacity' : 0.5}
+	feature_group_name : string variable refering to the name of the group of data added to the map
+	map : map to which data is added
+	'''
+
+
+	assert user in ['Gabriel','Hugo']
+
+	if user == 'Hugo':
+		loc_image = '/Users/'+user+'/Documents/Github/Projet_informatique_ENSAE/img/'
+	else :
+		loc_image = '/Users/'+user+'/Documents/GitHub/Projet_informatique_ENSAE/img/'
+
+	if show : 
+		feature_group = folium.FeatureGroup(name=feature_group_name)
+	else :
+		feature_group = folium.FeatureGroup(name=feature_group_name, show = False)
+
+	for key in data.keys():
+
+		type_vin = data[key]['properties']['type_vin']
+		info = get_info(data[key])
+		pop_up_content = get_logo(type_vin, loc_image, info)
+		folium.GeoJson(data[key],style_function= lambda feature : style).add_to(feature_group).add_child(folium.Popup(pop_up_content, max_height = 250, max_width = 700, min_width = 350))
+
+	feature_group.add_to(map)
+
+	return None
+
 
 
 def add_layertomap_no_image(data, style, feature_group_name, map, show = True):
