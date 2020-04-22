@@ -179,10 +179,12 @@ def get_logo(type_vin, directory, wine_info, picture = True):
 
 	if type_vin == 'blanc' :
 		loc = directory + 'Bouteille-Blanc1.png'
-		a = '45'
+	
 	else :
 		loc = directory + 'Bouteille-Rouge1.png'
-		a = '25'
+	
+	width = '50'
+	height = '120'
 
 	encoded = base64.b64encode(open(loc, 'rb').read())
 
@@ -190,11 +192,11 @@ def get_logo(type_vin, directory, wine_info, picture = True):
 
 	if picture:
 
-		html = html + '<td> <img style="width:'+a+'%; height:10%;" src="data:image/png;base64,{}"> </td> </tr> </table>'
+		html = html + '<td> <img style="width:'+width+'; height:'+height+';" src="data:image/png;base64,{}"> </td> </tr> </table>'
 		html = html.format
 	
 
-		iframe = folium.IFrame(html(encoded.decode('UTF-8')), width=632+20, height=420+20)
+		iframe = folium.IFrame(html(encoded.decode('UTF-8')), width=432+20, height=380+20)
 
 	return iframe
 
